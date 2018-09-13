@@ -11,49 +11,45 @@ namespace SpecVini.Controllers
     [Route("api/[controller]")]
     public class ProdutoController : ControllerBase
     {
-        public static List<Produto> dataBaseProdutos = new List<Produto>
+        private readonly SpecContexto _context;
+
+        public ProdutoController(SpecContexto contexto)
         {
-            new Produto
-            {
-                Id = 1,
-                SKU = 1,
-                Descricao = "Salame",
-                Dimensoes = "15x5x5",
-                Quantidade = 0
-            }
-        };
+            _context = contexto;
+        }
 
         [HttpGet]
         public List<Produto> GetAll()
         {
-            return dataBaseProdutos;
+            return _context.Produtos.ToList();
         }
 
-        [HttpGet("{id}")]
-        public Produto Get(int id)
-        {
-            foreach (var produto in dataBaseProdutos)
-            {
-                if (id == produto.Id)
-                {
-                    return produto;
-                }
-            }
-            return null;
-        }
+        //[HttpGet("{id}")]
+        //public Produto Get(int id)
+        //{
+        //    foreach (var produto in _context.Produtos)
+        //    {
+        //        if (id == produto.Id)
+        //        {
+        //            return produto;
+        //        }
+        //    }
+        //    return null;
+        //}
 
         [HttpPost]
         public void Post([FromBody] Produto newproduto)
         {
-            dataBaseProdutos.Add(newproduto);
+            _context.Produtos.Add(newproduto);
+            _context.SaveChanges();
         }
 
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Produto newProduto)
         {
-            foreach (var produto in dataBaseProdutos)
+            foreach (var produto in _context.Produtos)
             {
-                if (id == produto.Id)
+                if (id != produto.Id)
                 {
                     produto.Id = newProduto.Id;
                     produto.SKU = newProduto.SKU;
@@ -67,26 +63,21 @@ namespace SpecVini.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            foreach (var produto in dataBaseProdutos)
+            foreach (var produto in _context.Produtos)
             {
                 var deletar = produto;
                 if (id == produto.Id)
                 {
                     deletar = null;
+                    _context.SaveChanges();
                 }
             }
         }
 
-
-        //public void ListarEstoque()
-        //{
-            
-        //}
-
-        [HttpGet("[controller]/{ id:int}")]
+        [HttpGet("[controller]/{id}")]
         public IEnumerable<Produto> ListarEstoqueEspecifico(int id)
         {
-            var estoqueEspecifico = from produto in dataBaseProdutos
+            var estoqueEspecifico = from produto in _context.Produtos
                                     where produto.Id == id
                                     select produto;
 

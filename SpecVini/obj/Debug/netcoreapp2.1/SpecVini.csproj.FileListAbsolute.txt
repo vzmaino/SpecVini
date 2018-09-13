@@ -12,3 +12,17 @@ C:\Users\vzmai\source\repos\SpecVini\SpecVini\obj\Debug\netcoreapp2.1\SpecVini.R
 C:\Users\vzmai\source\repos\SpecVini\SpecVini\bin\Debug\netcoreapp2.1\SpecVini.pdb
 C:\Users\vzmai\source\repos\SpecVini\SpecVini\obj\Debug\netcoreapp2.1\SpecVini.dll
 C:\Users\vzmai\source\repos\SpecVini\SpecVini\obj\Debug\netcoreapp2.1\SpecVini.pdb
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\bin\Debug\netcoreapp2.1\SpecVini.deps.json
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\bin\Debug\netcoreapp2.1\SpecVini.runtimeconfig.json
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\bin\Debug\netcoreapp2.1\SpecVini.runtimeconfig.dev.json
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\bin\Debug\netcoreapp2.1\SpecVini.dll
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\bin\Debug\netcoreapp2.1\SpecVini.pdb
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\obj\Debug\netcoreapp2.1\SpecVini.csprojAssemblyReference.cache
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\obj\Debug\netcoreapp2.1\SpecVini.csproj.CoreCompileInputs.cache
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\obj\Debug\netcoreapp2.1\SpecVini.RazorAssemblyInfo.cache
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\obj\Debug\netcoreapp2.1\SpecVini.RazorAssemblyInfo.cs
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\obj\Debug\netcoreapp2.1\SpecVini.AssemblyInfoInputs.cache
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\obj\Debug\netcoreapp2.1\SpecVini.AssemblyInfo.cs
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\obj\Debug\netcoreapp2.1\SpecVini.RazorTargetAssemblyInfo.cache
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\obj\Debug\netcoreapp2.1\SpecVini.dll
+C:\Users\vzmai\OneDrive\Área de Trabalho\Elliot\SpecVini\SpecVini\obj\Debug\netcoreapp2.1\SpecVini.pdb

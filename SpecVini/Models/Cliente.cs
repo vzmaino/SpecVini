@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace SpecVini.Models
 {
-    public class ClienteViewModel
+    public class Cliente
     {
-        public string Nome { get; set; }
         public int Id { get; set; }
+        public string Nome { get; set; }
         public string CPF { get; set; }
         public DateTime DataDeNascimento { get; set; }
         public int GastosEmCompras { get; set; }

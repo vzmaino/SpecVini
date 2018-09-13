@@ -11,35 +11,30 @@ namespace SpecVini.Controllers
     [Route("api/[controller]")]
     public class ClientesController : ControllerBase
     {
-        public static List<Models.ClienteViewModel> dataBaseClientes = new List<Models.ClienteViewModel>
+        private readonly SpecContexto _context;
+
+        public ClientesController(SpecContexto contexto)
         {
-            new Models.ClienteViewModel
-            {
-                Nome = "Vinicius",
-                Id = 1,
-                CPF = "123456789-01",
-                DataDeNascimento = new DateTime(1993,10,16),
-                GastosEmCompras = 0
-            }
-        };
+            _context = contexto;
+        }
 
         [HttpGet]
-        public List<Models.ClienteViewModel> GetAll()
+        public List<Cliente> GetAll()
         {
-            return dataBaseClientes;
+            return _context.Clientes.ToList();
         }
 
         [HttpGet("{id}")]
-        public ClienteViewModel Get(int id)
+        public Cliente Get(int id)
         {
-            var clienteSelecionado = new ClienteViewModel();
-            foreach (var cliente in dataBaseClientes)
+            var clienteSelecionado = new Cliente();
+            foreach (var cliente in _context.Clientes)
             {
                 if (id == cliente.Id)
                 {
-                    clienteSelecionado = new ClienteViewModel();
+                    clienteSelecionado = new Cliente();
                     clienteSelecionado.Nome = cliente.Nome;
-                    clienteSelecionado.Compras = cliente.GastosEmCompras;
+                    clienteSelecionado.GastosEmCompras = cliente.GastosEmCompras;
                 } 
             }
             if(clienteSelecionado != null)
@@ -53,15 +48,16 @@ namespace SpecVini.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] Models.ClienteViewModel newcliente)
+        public void Post([FromBody] Cliente newcliente)
         {
-            dataBaseClientes.Add(newcliente);
+            _context.Clientes.Add(newcliente);
+            _context.SaveChanges();
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Models.ClienteViewModel newCliente)
+        public void Put(int id, [FromBody] Cliente newCliente)
         {
-            foreach (var cliente in dataBaseClientes)
+            foreach (var cliente in _context.Clientes)
             {
                 if (id == cliente.Id)
                 {
@@ -77,7 +73,7 @@ namespace SpecVini.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            foreach(var cliente in dataBaseClientes)
+            foreach(var cliente in _context.Clientes)
             {
                 if (id == cliente.Id)
                 {
@@ -86,10 +82,10 @@ namespace SpecVini.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("especifico/{id}")]
         public IEnumerable<ClienteViewModel> ListarClienteEspecifico(int id)
         {
-            var clienteSelecionado = from cliente in dataBaseClientes
+            var clienteSelecionado = from cliente in _context.Clientes
                                      where cliente.Id == id
                                      select new ClienteViewModel
                                      {
@@ -101,10 +97,10 @@ namespace SpecVini.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("top")]
         public IEnumerable<ClienteViewModel> ListarTopClientes()
         {
-            var clienteSelecionado = from cliente in dataBaseClientes
+            var clienteSelecionado = from cliente in _context.Clientes
                                      orderby cliente.GastosEmCompras
                                      select new ClienteViewModel
                                      {
