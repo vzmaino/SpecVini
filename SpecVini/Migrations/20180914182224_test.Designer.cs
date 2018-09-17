@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpecVini.Models;
 
 namespace SpecVini.Migrations
 {
     [DbContext(typeof(SpecContexto))]
-    partial class SpecContextoModelSnapshot : ModelSnapshot
+    [Migration("20180914182224_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,11 +28,11 @@ namespace SpecVini.Migrations
 
                     b.Property<DateTime>("DataDeNascimento");
 
-                    b.Property<bool>("Deletado");
-
                     b.Property<int>("GastosEmCompras");
 
                     b.Property<string>("Nome");
+
+                    b.Property<int>("Sexo");
 
                     b.HasKey("Id");
 

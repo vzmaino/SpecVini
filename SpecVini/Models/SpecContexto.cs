@@ -16,4 +16,3 @@ namespace SpecVini.Models
         public DbSet<Produto> Produtos { get; set; }
     }
 }
-

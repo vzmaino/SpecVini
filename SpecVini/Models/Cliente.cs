@@ -12,5 +12,6 @@ namespace SpecVini.Models
         public string CPF { get; set; }
         public DateTime DataDeNascimento { get; set; }
         public int GastosEmCompras { get; set; }
+        public bool Deletado { get; set; }
     }
 }

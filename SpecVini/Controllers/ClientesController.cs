@@ -21,30 +21,12 @@ namespace SpecVini.Controllers
         [HttpGet]
         public List<Cliente> GetAll()
         {
-            return _context.Clientes.ToList();
-        }
+            var clientesCadastrados = _context
+               .Clientes
+               .Where(c => c.Deletado != true)
+               .ToList();
 
-        [HttpGet("{id}")]
-        public Cliente Get(int id)
-        {
-            var clienteSelecionado = new Cliente();
-            foreach (var cliente in _context.Clientes)
-            {
-                if (id == cliente.Id)
-                {
-                    clienteSelecionado = new Cliente();
-                    clienteSelecionado.Nome = cliente.Nome;
-                    clienteSelecionado.GastosEmCompras = cliente.GastosEmCompras;
-                } 
-            }
-            if(clienteSelecionado != null)
-            {
-                return clienteSelecionado;
-            }
-            else
-            {
-                return null;
-            }
+            return clientesCadastrados;
         }
 
         [HttpPost]
@@ -57,58 +39,58 @@ namespace SpecVini.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Cliente newCliente)
         {
-            foreach (var cliente in _context.Clientes)
-            {
-                if (id == cliente.Id)
-                {
-                    cliente.Nome = newCliente.Nome;
-                    cliente.Id = newCliente.Id;
-                    cliente.CPF = newCliente.CPF;
-                    cliente.DataDeNascimento = newCliente.DataDeNascimento;
-                    cliente.GastosEmCompras = newCliente.GastosEmCompras;
-                }
-            }
+            var putCliente = _context
+                .Clientes
+                .FirstOrDefault(c => c.Id == id);
+
+            putCliente.Id = newCliente.Id;
+            putCliente.Nome = newCliente.Nome;
+            putCliente.CPF = newCliente.CPF;
+            putCliente.DataDeNascimento = newCliente.DataDeNascimento;
+            putCliente.GastosEmCompras = newCliente.GastosEmCompras;
+            putCliente.Deletado = newCliente.Deletado;
+            _context.SaveChanges();
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            foreach(var cliente in _context.Clientes)
-            {
-                if (id == cliente.Id)
-                {
-                    
-                }
-            }
+            var clienteDeletado = _context
+                .Clientes
+                .Single(c => c.Id == id);
+
+            clienteDeletado.Deletado = true;
+            _context.SaveChanges();
         }
 
         [HttpGet("especifico/{id}")]
         public IEnumerable<ClienteViewModel> ListarClienteEspecifico(int id)
         {
-            var clienteSelecionado = from cliente in _context.Clientes
-                                     where cliente.Id == id
-                                     select new ClienteViewModel
-                                     {
-                                         Nome = cliente.Nome,
-                                         Compras = cliente.GastosEmCompras
-                                     };
+            var clienteSelecionado = _context
+                .Clientes
+                .Where(c => c.Id == id)
+                .Select(c => new ClienteViewModel
+                {
+                    Nome = c.Nome,
+                    Compras = c.GastosEmCompras
+                });
 
             return clienteSelecionado;
-
         }
 
         [HttpGet("top")]
         public IEnumerable<ClienteViewModel> ListarTopClientes()
         {
-            var clienteSelecionado = from cliente in _context.Clientes
-                                     orderby cliente.GastosEmCompras
-                                     select new ClienteViewModel
-                                     {
-                                         Nome = cliente.Nome,
-                                         Compras = cliente.GastosEmCompras
-                                     };
+            var clienteSelecionado = _context
+                .Clientes
+                .OrderByDescending(c => c.GastosEmCompras)
+                .Select(c => new ClienteViewModel
+                {
+                    Nome = c.Nome,
+                    Compras = c.GastosEmCompras
+                })
+                .Take(10);
 
-            clienteSelecionado.Take(10);
             return clienteSelecionado;
         }
     }
